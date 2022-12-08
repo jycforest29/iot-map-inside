@@ -1,0 +1,112 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.example.mapinsde"
+4    android:versionCode="1"
+5    android:versionName="1.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="29"
+8-->C:\Users\USER\AndroidStudioProjects\MapInsde\app\src\main\AndroidManifest.xml
+9        android:targetSdkVersion="32" />
+9-->C:\Users\USER\AndroidStudioProjects\MapInsde\app\src\main\AndroidManifest.xml
+10
+11    <!--
+12     If your app targets Android 9 or lower, you can declare
+13     ACCESS_COARSE_LOCATION instead.
+14    -->
+15    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+15-->C:\Users\USER\AndroidStudioProjects\MapInsde\app\src\main\AndroidManifest.xml:8:5-79
+15-->C:\Users\USER\AndroidStudioProjects\MapInsde\app\src\main\AndroidManifest.xml:8:22-76
+16    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+16-->C:\Users\USER\AndroidStudioProjects\MapInsde\app\src\main\AndroidManifest.xml:9:5-81
+16-->C:\Users\USER\AndroidStudioProjects\MapInsde\app\src\main\AndroidManifest.xml:9:22-78
+17    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
+17-->C:\Users\USER\AndroidStudioProjects\MapInsde\app\src\main\AndroidManifest.xml:10:5-85
+17-->C:\Users\USER\AndroidStudioProjects\MapInsde\app\src\main\AndroidManifest.xml:10:22-82
+18    <uses-permission android:name="android.permission.BLUETOOTH" />
+18-->C:\Users\USER\AndroidStudioProjects\MapInsde\app\src\main\AndroidManifest.xml:11:5-68
+18-->C:\Users\USER\AndroidStudioProjects\MapInsde\app\src\main\AndroidManifest.xml:11:22-65
+19    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+19-->C:\Users\USER\AndroidStudioProjects\MapInsde\app\src\main\AndroidManifest.xml:12:5-74
+19-->C:\Users\USER\AndroidStudioProjects\MapInsde\app\src\main\AndroidManifest.xml:12:22-71
+20    <uses-permission android:name="android.permission.BLUETOOTH_SCAN" />
+20-->C:\Users\USER\AndroidStudioProjects\MapInsde\app\src\main\AndroidManifest.xml:13:5-73
+20-->C:\Users\USER\AndroidStudioProjects\MapInsde\app\src\main\AndroidManifest.xml:13:22-70
+21
+22    <!-- <uses-permission android:name="android.permission.BLUETOOTH_ADVERTISE" /> -->
+23    <!-- <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" /> -->
+24
+25
+26    <!-- <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" /> -->
+27
+28    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
+28-->C:\Users\USER\AndroidStudioProjects\MapInsde\app\src\main\AndroidManifest.xml:20:5-76
+28-->C:\Users\USER\AndroidStudioProjects\MapInsde\app\src\main\AndroidManifest.xml:20:22-73
+29
+30    <application
+30-->C:\Users\USER\AndroidStudioProjects\MapInsde\app\src\main\AndroidManifest.xml:21:5-41:19
+31        android:allowBackup="true"
+31-->C:\Users\USER\AndroidStudioProjects\MapInsde\app\src\main\AndroidManifest.xml:23:9-35
+32        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+32-->[androidx.core:core:1.7.0] C:\Users\USER\.gradle\caches\transforms-3\0c734a8f9451ded3159b05d46fc9a23a\transformed\core-1.7.0\AndroidManifest.xml:24:18-86
+33        android:dataExtractionRules="@xml/data_extraction_rules"
+33-->C:\Users\USER\AndroidStudioProjects\MapInsde\app\src\main\AndroidManifest.xml:24:9-65
+34        android:debuggable="true"
+35        android:extractNativeLibs="false"
+36        android:fullBackupContent="@xml/backup_rules"
+36-->C:\Users\USER\AndroidStudioProjects\MapInsde\app\src\main\AndroidManifest.xml:25:9-54
+37        android:icon="@mipmap/ic_launcher"
+37-->C:\Users\USER\AndroidStudioProjects\MapInsde\app\src\main\AndroidManifest.xml:26:9-43
+38        android:label="@string/app_name"
+38-->C:\Users\USER\AndroidStudioProjects\MapInsde\app\src\main\AndroidManifest.xml:27:9-41
+39        android:persistent="true"
+39-->C:\Users\USER\AndroidStudioProjects\MapInsde\app\src\main\AndroidManifest.xml:22:9-34
+40        android:roundIcon="@mipmap/ic_launcher_round"
+40-->C:\Users\USER\AndroidStudioProjects\MapInsde\app\src\main\AndroidManifest.xml:28:9-54
+41        android:supportsRtl="true"
+41-->C:\Users\USER\AndroidStudioProjects\MapInsde\app\src\main\AndroidManifest.xml:29:9-35
+42        android:testOnly="true"
+43        android:theme="@style/Theme.MapInsde" >
+43-->C:\Users\USER\AndroidStudioProjects\MapInsde\app\src\main\AndroidManifest.xml:30:9-46
+44        <activity
+44-->C:\Users\USER\AndroidStudioProjects\MapInsde\app\src\main\AndroidManifest.xml:32:9-40:20
+45            android:name="com.example.mapinsde.MainActivity"
+45-->C:\Users\USER\AndroidStudioProjects\MapInsde\app\src\main\AndroidManifest.xml:33:13-41
+46            android:exported="true" >
+46-->C:\Users\USER\AndroidStudioProjects\MapInsde\app\src\main\AndroidManifest.xml:34:13-36
+47            <intent-filter>
+47-->C:\Users\USER\AndroidStudioProjects\MapInsde\app\src\main\AndroidManifest.xml:35:13-39:29
+48                <action android:name="android.intent.action.MAIN" />
+48-->C:\Users\USER\AndroidStudioProjects\MapInsde\app\src\main\AndroidManifest.xml:36:17-69
+48-->C:\Users\USER\AndroidStudioProjects\MapInsde\app\src\main\AndroidManifest.xml:36:25-66
+49
+50                <category android:name="android.intent.category.LAUNCHER" />
+50-->C:\Users\USER\AndroidStudioProjects\MapInsde\app\src\main\AndroidManifest.xml:38:17-77
+50-->C:\Users\USER\AndroidStudioProjects\MapInsde\app\src\main\AndroidManifest.xml:38:27-74
+51            </intent-filter>
+52        </activity>
+53
+54        <provider
+54-->[androidx.emoji2:emoji2:1.0.0] C:\Users\USER\.gradle\caches\transforms-3\9cb5d0b2fd275b8005e0d8fda37c4df6\transformed\emoji2-1.0.0\AndroidManifest.xml:26:9-34:20
+55            android:name="androidx.startup.InitializationProvider"
+55-->[androidx.emoji2:emoji2:1.0.0] C:\Users\USER\.gradle\caches\transforms-3\9cb5d0b2fd275b8005e0d8fda37c4df6\transformed\emoji2-1.0.0\AndroidManifest.xml:27:13-67
+56            android:authorities="com.example.mapinsde.androidx-startup"
+56-->[androidx.emoji2:emoji2:1.0.0] C:\Users\USER\.gradle\caches\transforms-3\9cb5d0b2fd275b8005e0d8fda37c4df6\transformed\emoji2-1.0.0\AndroidManifest.xml:28:13-68
+57            android:exported="false" >
+57-->[androidx.emoji2:emoji2:1.0.0] C:\Users\USER\.gradle\caches\transforms-3\9cb5d0b2fd275b8005e0d8fda37c4df6\transformed\emoji2-1.0.0\AndroidManifest.xml:29:13-37
+58            <meta-data
+58-->[androidx.emoji2:emoji2:1.0.0] C:\Users\USER\.gradle\caches\transforms-3\9cb5d0b2fd275b8005e0d8fda37c4df6\transformed\emoji2-1.0.0\AndroidManifest.xml:31:13-33:52
+59                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+59-->[androidx.emoji2:emoji2:1.0.0] C:\Users\USER\.gradle\caches\transforms-3\9cb5d0b2fd275b8005e0d8fda37c4df6\transformed\emoji2-1.0.0\AndroidManifest.xml:32:17-75
+60                android:value="androidx.startup" />
+60-->[androidx.emoji2:emoji2:1.0.0] C:\Users\USER\.gradle\caches\transforms-3\9cb5d0b2fd275b8005e0d8fda37c4df6\transformed\emoji2-1.0.0\AndroidManifest.xml:33:17-49
+61            <meta-data
+61-->[androidx.lifecycle:lifecycle-process:2.4.0] C:\Users\USER\.gradle\caches\transforms-3\8eef53d9995d138e5396bc0361630197\transformed\lifecycle-process-2.4.0\AndroidManifest.xml:31:13-33:52
+62                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+62-->[androidx.lifecycle:lifecycle-process:2.4.0] C:\Users\USER\.gradle\caches\transforms-3\8eef53d9995d138e5396bc0361630197\transformed\lifecycle-process-2.4.0\AndroidManifest.xml:32:17-78
+63                android:value="androidx.startup" />
+63-->[androidx.lifecycle:lifecycle-process:2.4.0] C:\Users\USER\.gradle\caches\transforms-3\8eef53d9995d138e5396bc0361630197\transformed\lifecycle-process-2.4.0\AndroidManifest.xml:33:17-49
+64        </provider>
+65    </application>
+66
+67</manifest>
