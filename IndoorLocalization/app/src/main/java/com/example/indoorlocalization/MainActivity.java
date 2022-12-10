@@ -39,7 +39,6 @@ public class MainActivity extends AppCompatActivity {
 
         setInitialPos();
 
-
         // 반복하기 위해 timer 생성
         Timer timer = new Timer();
 
