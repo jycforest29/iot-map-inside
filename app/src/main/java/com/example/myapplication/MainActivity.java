@@ -99,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
                         Log.d("기기주소", device.getAddress());
                         int rssi = intent.getShortExtra(BluetoothDevice.EXTRA_RSSI,Short.MIN_VALUE);
                         Log.d("rssi", String.valueOf(rssi));
-                        setConnection(rssi, 80);
+                        //setConnection(rssi, -74);
                         //Log.d("rssi", device.);
                     }
                 }
@@ -150,7 +150,7 @@ public class MainActivity extends AppCompatActivity {
         };
 
         timer.schedule(TT, 1000, 1000);
-
+        //setConnection(-64, -74);
 
     }
 
