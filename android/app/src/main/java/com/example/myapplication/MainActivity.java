@@ -9,6 +9,8 @@ import androidx.core.content.ContextCompat;
 import android.Manifest;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
+import android.bluetooth.le.BluetoothLeScanner;
+import android.bluetooth.le.ScanSettings;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -40,6 +42,8 @@ public class MainActivity extends AppCompatActivity {
     private double x;
     private double y;
     BluetoothAdapter bluetoothAdapter;
+    BluetoothLeScanner bluetoothLeScanner;
+    ScanSettings settings;
 
     private final static int roomWidth = 782;
     private final static int roomHeight = 1259;
@@ -59,12 +63,11 @@ public class MainActivity extends AppCompatActivity {
     private int imuY;
     private AccelPositioning AccelPositioning;
 
-    Handler accelHandler = new Handler(Looper.getMainLooper()){
+    Handler accelHandler = new Handler(Looper.getMainLooper()) {
         @Override
-        public void handleMessage(Message msg)
-        {
-            imuX = (int)AccelPositioning.pos[0];
-            imuY = (int)AccelPositioning.pos[1];
+        public void handleMessage(Message msg) {
+            imuX = (int) AccelPositioning.pos[0];
+            imuY = (int) AccelPositioning.pos[1];
 
             setPos(imuX, imuY);
             Log.d("IMU update", imuX + ", " + imuY);
@@ -83,7 +86,6 @@ public class MainActivity extends AppCompatActivity {
         locationPointer = findViewById(R.id.location_pointer);
 
         setInitialPos();
-
         // Create a BroadcastReceiver for ACTION_FOUND.
         BroadcastReceiver receiver = new BroadcastReceiver() {
             @Override
@@ -95,9 +97,9 @@ public class MainActivity extends AppCompatActivity {
                     String deviceHardwareAddress = device.getAddress(); // MAC address
 
                     if (ActivityCompat.checkSelfPermission(MainActivity.this, Manifest.permission.BLUETOOTH_CONNECT) == PackageManager.PERMISSION_GRANTED) {
-                        Log.d("무지성 로그", "무지성 로그");
+                        //Log.d("무지성 로그", "무지성 로그");
                         Log.d("기기주소", device.getAddress());
-                        int rssi = intent.getShortExtra(BluetoothDevice.EXTRA_RSSI,Short.MIN_VALUE);
+                        int rssi = intent.getShortExtra(BluetoothDevice.EXTRA_RSSI, Short.MIN_VALUE);
                         Log.d("rssi", String.valueOf(rssi));
                         //setConnection(rssi, -74);
                         //Log.d("rssi", device.);
@@ -105,11 +107,17 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         };
-
         IntentFilter filter = new IntentFilter("android.bluetooth.device.action.FOUND");
         registerReceiver(receiver, filter);
 
         this.bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+        this.bluetoothLeScanner = this.bluetoothAdapter.getBluetoothLeScanner();
+        settings = new ScanSettings.Builder().setScanMode(
+                        ScanSettings.SCAN_MODE_LOW_LATENCY)
+                .setReportDelay(0)
+                .setCallbackType(ScanSettings.CALLBACK_TYPE_ALL_MATCHES)
+                .build();
+
 
         if (this.bluetoothAdapter == null) {
             Toast.makeText(this, "기기 자체가 지원을 안함", Toast.LENGTH_LONG).show();
@@ -149,21 +157,21 @@ public class MainActivity extends AppCompatActivity {
             }
         };
 
-        timer.schedule(TT, 1000, 1000);
+        timer.schedule(TT, 2000, 6000);
         //setConnection(-64, -74);
 
     }
 
     @Override
-    protected void onResume(){
+    protected void onResume() {
         super.onResume();
         ActivityCompat.requestPermissions(MainActivity.this, new String[]{"android.permission.ACCESS_FINE_LOCATION",
                 "android.permission.ACCESS_COARSE_LOCATION", "android.permission.ACCESS_BACKGROUND_LOCATION",
                 "android.permission.BLUETOOTH_ADMIN", "android.permission.BLUETOOTH_CONNECT",
-                "android.permission.BLUETOOTH_SCAN"},1);
+                "android.permission.BLUETOOTH_SCAN"}, 1);
     }
 
-    private void setConnection(int rssi, int t){
+    private void setConnection(int rssi, int t) {
         Rssi rssiValue = new Rssi(rssi, t);
         Call<Coordinate> call = RetrofitClient.getInstance().getConnectionObj().getCoordinate(rssiValue);
 
@@ -174,10 +182,10 @@ public class MainActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     x = response.body().getX();
                     y = response.body().getY();
-                    setPos((int)x, (int)y);
+                    setPos((int) x, (int) y);
                     // update IMU
                     if (AccelPositioning != null)
-                        AccelPositioning.PositionUpdate((int)x, (int)y);
+                        AccelPositioning.PositionUpdate((int) x, (int) y);
                 } else {
                     Toast.makeText(getApplicationContext(), "response 에러", Toast.LENGTH_LONG).show();
                 }
@@ -194,8 +202,8 @@ public class MainActivity extends AppCompatActivity {
         ConstraintLayout.LayoutParams newLayoutParams = (ConstraintLayout.LayoutParams) locationPointer.getLayoutParams();
 
         Resources res = getResources();
-        newLayoutParams.bottomMargin = (int)(res.getDimension(R.dimen.room_height) * ((float)originY / roomHeight));
-        newLayoutParams.rightMargin = -(int)(res.getDimension(R.dimen.room_width) * ((float)originX / roomWidth));
+        newLayoutParams.bottomMargin = (int) (res.getDimension(R.dimen.room_height) * ((float) originY / roomHeight));
+        newLayoutParams.rightMargin = -(int) (res.getDimension(R.dimen.room_width) * ((float) originX / roomWidth));
         initialBotMargin = newLayoutParams.bottomMargin;
         initialRightMargin = newLayoutParams.rightMargin;
         locationPointer.setLayoutParams(newLayoutParams);
@@ -206,26 +214,42 @@ public class MainActivity extends AppCompatActivity {
     private void setPos(int x, int y) {
         ConstraintLayout.LayoutParams newLayoutParams = (ConstraintLayout.LayoutParams) locationPointer.getLayoutParams();
         Resources res = getResources();
-        newLayoutParams.bottomMargin = initialBotMargin + (int)(res.getDimension(R.dimen.room_height) * ((float)y / roomHeight));
-        newLayoutParams.rightMargin = initialRightMargin - (int)(res.getDimension(R.dimen.room_width) * ((float)x / roomWidth));
+        newLayoutParams.bottomMargin = initialBotMargin + (int) (res.getDimension(R.dimen.room_height) * ((float) y / roomHeight));
+        newLayoutParams.rightMargin = initialRightMargin - (int) (res.getDimension(R.dimen.room_width) * ((float) x / roomWidth));
         locationPointer.setLayoutParams(newLayoutParams);
     }
 
 
     private void findDevice() {
+
+        if (ContextCompat.checkSelfPermission(MainActivity.this, android.Manifest.permission.BLUETOOTH_SCAN) == PackageManager.PERMISSION_GRANTED) {
+
+            if (this.bluetoothAdapter.isDiscovering()) {
+                this.bluetoothAdapter.cancelDiscovery();
+            }
+            this.bluetoothAdapter.startDiscovery();
+        }
+
         // Create a BroadcastReceiver for ACTION_FOUND.
         BroadcastReceiver receiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
                 String action = intent.getAction();
+
                 if (BluetoothDevice.ACTION_FOUND.equals(action)) {
                     BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
                     String deviceHardwareAddress = device.getAddress(); // MAC address
-
                     if (ActivityCompat.checkSelfPermission(MainActivity.this, Manifest.permission.BLUETOOTH_CONNECT) == PackageManager.PERMISSION_GRANTED) {
-                        if (device.getAddress().equals("A8:79:8D:8F:11:FD")) {
+                        Log.d("무지성 로그" , device.getAddress() + device.getName());
+                        if (device.getAddress().equals("3C:A6:F6:4F:43:5B")) {
+                            //3C:A6:F6:4F:43:5B 맥북에어
+                            //D8:A3:5C:DF:DF:21 티비
+                            //BC:D0:74:02:76 맥북프로
+                            //구 A8:79:8D:8F:11:FD
+                            //구 5C:CB:99:AA:4D:36
                             int rssi = intent.getShortExtra(BluetoothDevice.EXTRA_RSSI, Short.MIN_VALUE);
                             Log.d("test1", String.valueOf(rssi));
+                            Log.d("무지성 로그, 1", "일단 들어옴");
                             //bluetooth1
                             if(state == 0){
                                 Log.d("무지성 로그, 1", "state 0 -> 1");
@@ -241,9 +265,10 @@ public class MainActivity extends AppCompatActivity {
                                 setConnection(rssi1, rssi2);
                             }
                         }
-                        if ((device.getAddress().equals("5C:CB:99:AA:4D:36"))) {
+                        if ((device.getAddress().equals("BC:D0:74:02:76:C6"))) {
                             int rssi = intent.getShortExtra(BluetoothDevice.EXTRA_RSSI, Short.MIN_VALUE);
                             Log.d("test2", String.valueOf(rssi));
+                            Log.d("무지성 로그, 2", "일단 들어옴");
                             if(state == 0){
                                 Log.d("무지성 로그, 2", "state 0 -> 2");
                                 state = 2;

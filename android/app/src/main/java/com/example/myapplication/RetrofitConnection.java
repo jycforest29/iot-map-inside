@@ -9,7 +9,7 @@ import retrofit2.http.POST;
 
 public interface RetrofitConnection {
     //String BASE_URL = "http://10.210.97.125:8000/";
-    String BASE_URL = "https://573e-219-255-207-132.jp.ngrok.io/";
+    String BASE_URL = "https://e70c-121-129-200-106.jp.ngrok.io/";
 //    @POST("bluetooth/")
 //    Call<Coordinate> getCoordinate(@Body Rssi rssi);
 
